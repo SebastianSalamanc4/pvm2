@@ -1,0 +1,78 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 0.01rem; /* Reduje padding horizontal */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.7rem; /* reducido para evitar corte en el borde */
+  flex-wrap: wrap; /* permite que se ajusten si no hay espacio */
+}
+
+.nav-links ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.nav-links ul li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.reserve-button {
+  background: #facc15;
+  color: black;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.reserve-button:hover {
+  background: #eab308;
+}
+
+.main-content {
+  margin-top: 80px;
+}
+
+.logo img {
+  width: 70px;
+  height: auto;
+  border-radius: 5px;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Responsive: asegura que los enlaces no se corten */
+@media (max-width: 768px) {
+  .nav-links ul {
+    justify-content: center;
+  }
+}

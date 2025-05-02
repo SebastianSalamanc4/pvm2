@@ -1,0 +1,67 @@
+
+.home-container {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  padding-top: 80px; /* <-- Añadido para que el contenido no quede oculto bajo la navbar */
+}
+
+
+  .overlay {  /*efecto sombra */
+    position: absolute;
+    inset: 0,3;
+    background: rgba(83, 73, 73, 0.26);
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+  .title {
+    font-size: 5.5rem;
+    font-style: italic;
+    color: rgb(31, 13, 13);
+    text-align: center;
+    text-shadow: 5px 3px 4px rgb(255, 245, 100);
+    transform: translateY(50px); /* Inicialmente fuera de la pantalla */
+    opacity: 0;
+    animation: slideInFromBottom 1.2s ease-out forwards;
+  }
+  
+  @keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100px); /* Empieza fuera de la pantalla */
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0); /* Llega a su posición final */
+      opacity: 2;
+    }
+  }
+     
+  .vercarta, .reservaboton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .vercarta {
+    background: rgb(0, 0, 0);
+    color: white;
+  }
+  
+  .reservaboton {
+    background: #facc15;
+    border-radius: 6px;
+    
+  }
+  

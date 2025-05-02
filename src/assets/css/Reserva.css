@@ -1,0 +1,135 @@
+.reserva-container {
+  position: relative;
+  width: 950px;
+  height: 750px;
+  margin: 0 auto;
+  padding-top: 150px;
+  padding-left: 100px; /* OJO: te faltaba 'px' aquí */
+}
+
+/* Fondo general */
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../img/L1.png'); /* Tu imagen de fondo */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; /* Hace que cubra al menos toda la pantalla */
+}
+
+/* Imagen del mapa */
+.plano {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Estilos de las mesas */
+.mesa {
+  position: absolute;
+  width: 23px;
+  height: 20px;
+  background-color: #dfdfe0;
+  border-radius: 0; /* Puedes poner 50% si quieres que sean círculos */
+  cursor: pointer;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  z-index: 5;
+  opacity: 0.7; /* visible pero un poco translúcido */
+}
+
+.mesa:hover {
+  transform: scale(1.7);
+  opacity: 1; /* cuando pasas el ratón se ve más intensa */
+}
+
+.mesa.reservada {
+  background-color: rgba(0, 128, 0, 0.7); /* verde semitransparente */
+  border: 2px solid green;
+  border-radius: 50%; /* si quieres que se vean como circulitos reservados */
+}
+
+/* Caja flotante de horas disponibles */
+.horas-disponibles {
+  position: absolute;
+  top: -10px;
+  left: 25px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #000000;
+  padding: 8px;
+  width: 140px;
+  font-size: 14px;
+  z-index: 1000; /* Un valor alto para asegurarse de que esté encima de todo */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para el mensaje cuando una mesa ya está reservada */
+.mensaje-reservado {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Estilo para el contenedor del selector de día */
+.selector-dia-container {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 12px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.selector-dia-container label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 10px;
+  color: #ffffff;
+}
+
+.selector-dia-container input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.selector-dia-container input[type="date"]:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+.selector-dia-container input[type="date"]:focus {
+  border-color: #0056b3;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
+}
+
+/* Estilo para el texto de bloque reservado */
+.bloque-reservado {
+  color: red;
+  font-weight: bold;
+}
+
+/* Estilo para el botón de cancelar reserva (✖️) */
+.boton-cancelar {
+  margin-left: 5px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boton-cancelar:hover {
+  color: red;
+}
