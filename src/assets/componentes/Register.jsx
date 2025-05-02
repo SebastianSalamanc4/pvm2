@@ -102,9 +102,7 @@ export const Register = () => {
         </div>
       </div>
 
-      <footer className="footer">
-        404 Hunger Not Food · Política de privacidad
-      </footer>
+
     </div>
   );
 };

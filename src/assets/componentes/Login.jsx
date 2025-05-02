@@ -14,9 +14,6 @@ const Login = () => {
         </Link>
         <button className="login-button">CONFIRMAR</button>
       </div>
-      <footer className="login-footer">
-        404 Hunger Not Food · Política de privacidad
-      </footer>
     </div>
   );
 };

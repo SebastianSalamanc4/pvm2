@@ -1,67 +1,88 @@
+/* Asegúrate de que la página no tenga scroll innecesario */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+  height: 100%;
+}
 
+/* Fondo y contenedor principal */
 .home-container {
+  background-image: url('../img/f2.jpg'); /* Si usas una imagen de fondo */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
   width: 100%;
   position: relative;
-  padding-top: 80px; /* <-- Añadido para que el contenido no quede oculto bajo la navbar */
+  padding-top: 80px; /* Ajuste para que no quede oculto bajo la navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que no haya scroll en esta área */
 }
 
+/* Efecto sombra */
+.overlay {
+  position: absolute;
+  inset: 0; /* Ajustado para que ocupe todo el área */
+  background: rgba(83, 73, 73, 0.26); /* Sombra suave */
+}
 
-  .overlay {  /*efecto sombra */
-    position: absolute;
-    inset: 0,3;
-    background: rgba(83, 73, 73, 0.26);
-  }
-  
-  .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-    color: rgb(0, 0, 0);
-  }
-  .title {
-    font-size: 5.5rem;
-    font-style: italic;
-    color: rgb(31, 13, 13);
-    text-align: center;
-    text-shadow: 5px 3px 4px rgb(255, 245, 100);
-    transform: translateY(50px); /* Inicialmente fuera de la pantalla */
+/* Contenido */
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+/* Estilo del título */
+.title {
+  font-size: 5.5rem;
+  font-style: italic;
+  color: rgb(31, 13, 13);
+  text-align: center;
+  text-shadow: 5px 3px 4px rgb(255, 245, 100);
+  transform: translateY(50px); /* Inicialmente fuera de la pantalla */
+  opacity: 0;
+  animation: slideInFromBottom 1.2s ease-out forwards;
+}
+
+/* Animación de entrada del título */
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100px); /* Empieza fuera de la pantalla */
     opacity: 0;
-    animation: slideInFromBottom 1.2s ease-out forwards;
   }
-  
-  @keyframes slideInFromBottom {
-    0% {
-      transform: translateY(100px); /* Empieza fuera de la pantalla */
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0); /* Llega a su posición final */
-      opacity: 2;
-    }
+  100% {
+    transform: translateY(0); /* Llega a su posición final */
+    opacity: 1; /* Mejorar visibilidad */
   }
-     
-  .vercarta, .reservaboton {
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .vercarta {
-    background: rgb(0, 0, 0);
-    color: white;
-  }
-  
-  .reservaboton {
-    background: #facc15;
-    border-radius: 6px;
-    
-  }
-  
+}
+
+/* Estilo para los botones */
+.vercarta, .reservaboton {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Añadido para transiciones suaves */
+}
+
+.vercarta {
+  background: rgb(0, 0, 0);
+  color: white;
+}
+
+.reservaboton {
+  background: #facc15; /* Amarillo */
+  border-radius: 6px;
+}
+
+.reservaboton:hover {
+  background: #e0c600; /* Color más oscuro para el hover */
+}

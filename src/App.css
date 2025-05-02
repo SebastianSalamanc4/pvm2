@@ -1,6 +1,27 @@
-/* en index.css, global.css o donde tengas los estilos globales */
+/* Asegurarse de que html, body, y #root ocupen toda la pantalla sin scroll */
 html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden; /* Elimina cualquier desplazamiento */
+}
+
+/* Asegurarse de que los elementos no desborden */
+* {
+  box-sizing: border-box; /* Incluye padding y borde en el tamaño total */
+}
+
+/* Aplica la altura completa a todos los contenedores que puedan generar scroll */
+.home-container, .login-container, .register-container {
+  height: 100vh; /* Para asegurar que el contenido ocupe toda la altura de la pantalla */
+  width: 100%;
+  overflow: hidden; /* Elimina cualquier desbordamiento en contenedores */
+}
+
+/* Esto también puede ser útil si hay un contenedor que necesita centrarse */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que no haya scroll global */
 }
