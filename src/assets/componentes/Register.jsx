@@ -35,6 +35,10 @@ export const Register = () => {
       return;
     }
 
+    // Guardamos los datos del usuario en localStorage
+    const usuario = { rut, email, nombre, password };
+    localStorage.setItem('usuario', JSON.stringify(usuario));
+
     setStatusMessage('Cuenta creada con éxito.');
   };
 
@@ -101,8 +105,6 @@ export const Register = () => {
           <button onClick={handleSubmit}>Crear cuenta</button>
         </div>
       </div>
-
-
     </div>
   );
 };
