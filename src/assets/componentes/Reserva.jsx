@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/Reserva.css';
 import mapaMesas from '../img/mapaMesas.png';
 
 // Configuración de horarios
-const HORA_INICIO = 8; // 8 AM
-const HORA_FIN = 18;   // 6 PM
-const DURACION_BLOQUE = 2; // 2 horas
-const SEPARACION_BLOQUE = 0.5; // 30 minutos
+const HORA_INICIO = 8;
+const HORA_FIN = 18;
+const DURACION_BLOQUE = 2;
+const SEPARACION_BLOQUE = 0.5;
 
-// Datos de las mesas
 const mesas = [
   { id: 1, top: 600, left: 250 },
   { id: 2, top: 450, left: 485 },
   { id: 3, top: 450, left: 255 },
 ];
 
-// Función para generar bloques de horarios automáticamente
 const generarBloquesHorarios = () => {
   const bloques = [];
   let hora = HORA_INICIO;
@@ -31,8 +30,6 @@ const generarBloquesHorarios = () => {
     }
     const fin = `${finHora.toString().padStart(2, '0')}:${finMinutos === 0 ? '00' : '30'}`;
     bloques.push(`${inicio}-${fin}`);
-
-    // Avanzar 2h + 30min
     minutos += SEPARACION_BLOQUE * 60;
     hora += DURACION_BLOQUE;
     if (minutos >= 60) {
@@ -53,6 +50,16 @@ const Reserva = () => {
   const [mostrarMenu, setMostrarMenu] = useState(false);
   const [timer, setTimer] = useState(null);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const usuario = localStorage.getItem('usuario');
+    if (!usuario) {
+      alert("Debes iniciar sesión para reservar una mesa.");
+      navigate('/Login');
+    }
+  }, [navigate]);
+
   const manejarMouseEnter = (mesa) => {
     clearTimeout(timer);
     setMesaSeleccionada(mesa);
@@ -72,6 +79,7 @@ const Reserva = () => {
       alert('Por favor selecciona un día primero.');
       return;
     }
+
     setMesasReservadas((prev) => {
       const nuevasReservas = { ...prev };
       if (!nuevasReservas[mesaId]) {
@@ -106,7 +114,6 @@ const Reserva = () => {
 
   return (
     <div className="reserva-container">
-      {/* Selector de día */}
       <div className="selector-dia-container">
         <label><strong>Selecciona el día: </strong></label>
         <input
@@ -116,21 +123,16 @@ const Reserva = () => {
         />
       </div>
 
-      {/* Imagen de mapa */}
       <img src={mapaMesas} alt="Mapa de mesas" className="plano" />
 
-      {/* Renderizado de mesas */}
       {mesas.map((mesa) => (
         <div
           key={mesa.id}
-          className={`mesa ${
-            mesasReservadas[mesa.id]?.[diaSeleccionado]?.length ? 'reservada' : ''
-          }`}
+          className={`mesa ${mesasReservadas[mesa.id]?.[diaSeleccionado]?.length ? 'reservada' : ''}`}
           style={{ top: `${mesa.top}px`, left: `${mesa.left}px` }}
           onMouseEnter={() => manejarMouseEnter(mesa)}
           onMouseLeave={manejarMouseLeave}
         >
-          {/* Menú flotante de bloques */}
           {mesaSeleccionada?.id === mesa.id && mostrarMenu && (
             <div className="horas-disponibles">
               <strong>Reservas para {diaSeleccionado || 'día seleccionado'}:</strong>
@@ -145,7 +147,7 @@ const Reserva = () => {
                           className="boton-cancelar"
                           title="Cancelar Reserva"
                         >
-                          ✖️
+                          Cancelar
                         </button>
                       </span>
                     ) : (
