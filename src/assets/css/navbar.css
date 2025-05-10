@@ -88,3 +88,27 @@ html, body {
 .main-content {
   margin-top: 100px; /* Asegura que no se superponga con la navbar */
 }
+
+
+.usuario-session {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.cerrar-sesion-btn {
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cerrar-sesion-btn:hover {
+  background-color: #dc2626;
+}

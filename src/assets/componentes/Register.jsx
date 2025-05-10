@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 import "../css/Register.css";
 
 export const Register = () => {
@@ -7,6 +8,7 @@ export const Register = () => {
   const [nombre, setNombre] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
+  const navigate = useNavigate();  // Declara el hook para la redirección
 
   const validarEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,6 +42,9 @@ export const Register = () => {
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
     setStatusMessage('Cuenta creada con éxito.');
+
+    // Redirige al Home después de crear la cuenta
+    navigate('/');  // Redirige al home ("/")
   };
 
   return (

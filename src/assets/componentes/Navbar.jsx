@@ -1,11 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/navbar.css';
 
 const Navbar = () => {
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  const navigate = useNavigate();
+
+  const cerrarSesion = () => {
+    localStorage.removeItem('usuario');
+    navigate('/'); // Redirige a inicio
+    window.location.reload(); // Para refrescar el estado visual
+  };
+
   return (
     <header className="navbar">
-      <nav className="nav-links">
+      <div className="nav-links">
         <ul>
           <li><Link to="/">HOME</Link></li>
           <li><Link to="/Historia">HISTORIA</Link></li>
@@ -13,7 +22,16 @@ const Navbar = () => {
           <li><Link to="/Register">REGISTER</Link></li>
           <li><Link to="/Login">LOGIN</Link></li>
         </ul>
-      </nav>
+      </div>
+
+      {usuario && (
+        <div className="usuario-session">
+          <span>Sesión de: {usuario.email}</span>
+          <button onClick={cerrarSesion} className="cerrar-sesion-btn">
+            Cerrar sesión
+          </button>
+        </div>
+      )}
     </header>
   );
 };
