@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../css/navbar.css';
 
 const Navbar = () => {
-  const usuario = JSON.parse(localStorage.getItem('usuario'));
+  const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
   const navigate = useNavigate();
 
   const cerrarSesion = () => {
-    localStorage.removeItem('usuario');
-    navigate('/'); // Redirige a inicio
-    window.location.reload(); // Para refrescar el estado visual
+    localStorage.removeItem('usuarioActivo');
+    navigate('/');
+    window.location.reload();
   };
 
   return (

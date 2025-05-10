@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // Importa useNavigate
+import { useNavigate } from 'react-router-dom';
 import "../css/Register.css";
 
 export const Register = () => {
@@ -8,7 +8,7 @@ export const Register = () => {
   const [nombre, setNombre] = useState('');
   const [password, setPassword] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const navigate = useNavigate();  // Declara el hook para la redirección
+  const navigate = useNavigate();
 
   const validarEmail = (email) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,7 +16,6 @@ export const Register = () => {
   };
 
   const validarRut = (rut) => {
-    // Formato: números, guion, dígito verificador (número o k/K)
     const regex = /^\d{7,8}-[\dkK]$/;
     return regex.test(rut);
   };
@@ -37,14 +36,28 @@ export const Register = () => {
       return;
     }
 
-    // Guardamos los datos del usuario en localStorage
     const usuario = { rut, email, nombre, password };
-    localStorage.setItem('usuario', JSON.stringify(usuario));
+
+    // Obtener lista de usuarios existentes o iniciar una lista nueva
+    const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+    // Verificar si ya existe un usuario con ese rut o email
+    const existe = usuariosGuardados.some(u => u.rut === rut || u.email === email);
+    if (existe) {
+      setStatusMessage('Ya existe un usuario con ese RUT o correo electrónico.');
+      return;
+    }
+
+    // Agregar nuevo usuario
+    usuariosGuardados.push(usuario);
+
+    // Guardar la lista actualizada
+    localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
 
     setStatusMessage('Cuenta creada con éxito.');
 
-    // Redirige al Home después de crear la cuenta
-    navigate('/');  // Redirige al home ("/")
+    // Redirige al home
+    navigate('/');
   };
 
   return (

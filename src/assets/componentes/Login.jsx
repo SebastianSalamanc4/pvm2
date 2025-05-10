@@ -6,21 +6,23 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate(); // Para redirigir después de un login exitoso
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Obtener los datos guardados en localStorage
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    // Obtener la lista de usuarios guardados
+    const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    if (!usuario) {
-      setErrorMessage('No hay cuenta registrada con este correo.');
-      return;
-    }
+    // Buscar un usuario que coincida con email y contraseña
+    const usuario = usuariosGuardados.find(
+      (u) => u.email === email && u.password === password
+    );
 
-    // Verificar si el correo y la contraseña coinciden
-    if (usuario.email === email && usuario.password === password) {
+    if (usuario) {
+      // Guardar el usuario que inició sesión como "usuarioActivo"
+      localStorage.setItem('usuarioActivo', JSON.stringify(usuario));
+
       setErrorMessage('');
-      navigate('/'); // Redirige a la página principal después de un login exitoso
+      navigate('/'); // Redirige al home
     } else {
       setErrorMessage('Correo o contraseña incorrectos.');
     }

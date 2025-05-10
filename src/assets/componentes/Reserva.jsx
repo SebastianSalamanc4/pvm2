@@ -53,12 +53,30 @@ const Reserva = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const usuario = localStorage.getItem('usuario');
+    const usuario = JSON.parse(localStorage.getItem('usuarioActivo'));
     if (!usuario) {
       alert("Debes iniciar sesión para reservar una mesa.");
       navigate('/Login');
+      return;
     }
+
+    // Cargar reservas globales
+    const reservasGuardadas = JSON.parse(localStorage.getItem('reservasMesas')) || {};
+    setMesasReservadas(reservasGuardadas);
   }, [navigate]);
+
+  // Sincronizar entre pestañas
+  useEffect(() => {
+    const manejarCambioStorage = (event) => {
+      if (event.key === 'reservasMesas') {
+        const nuevasReservas = JSON.parse(event.newValue);
+        setMesasReservadas(nuevasReservas);
+      }
+    };
+
+    window.addEventListener('storage', manejarCambioStorage);
+    return () => window.removeEventListener('storage', manejarCambioStorage);
+  }, []);
 
   const manejarMouseEnter = (mesa) => {
     clearTimeout(timer);
@@ -82,13 +100,15 @@ const Reserva = () => {
 
     setMesasReservadas((prev) => {
       const nuevasReservas = { ...prev };
-      if (!nuevasReservas[mesaId]) {
-        nuevasReservas[mesaId] = {};
+      if (!nuevasReservas[mesaId]) nuevasReservas[mesaId] = {};
+      if (!nuevasReservas[mesaId][diaSeleccionado]) nuevasReservas[mesaId][diaSeleccionado] = [];
+
+      if (!nuevasReservas[mesaId][diaSeleccionado].includes(bloque)) {
+        nuevasReservas[mesaId][diaSeleccionado].push(bloque);
       }
-      if (!nuevasReservas[mesaId][diaSeleccionado]) {
-        nuevasReservas[mesaId][diaSeleccionado] = [];
-      }
-      nuevasReservas[mesaId][diaSeleccionado].push(bloque);
+
+      // Guardar en localStorage
+      localStorage.setItem('reservasMesas', JSON.stringify(nuevasReservas));
       return nuevasReservas;
     });
   };
@@ -104,6 +124,9 @@ const Reserva = () => {
           delete nuevasReservas[mesaId][diaSeleccionado];
         }
       }
+
+      // Guardar en localStorage
+      localStorage.setItem('reservasMesas', JSON.stringify(nuevasReservas));
       return nuevasReservas;
     });
   };
