@@ -1,8 +1,9 @@
+/* Navbar: */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 1rem 0.01rem; /* Reduje padding horizontal */
+  padding: 1rem 1rem; /* Aumenté el padding horizontal para que haya más espacio */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,8 +22,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 0.7rem; /* reducido para evitar corte en el borde */
-  flex-wrap: wrap; /* permite que se ajusten si no hay espacio */
+  gap: 0.7rem; /* Reducido para evitar corte en el borde */
+  flex-wrap: wrap; /* Permite que se ajusten si no hay espacio */
 }
 
 .nav-links ul li a {
@@ -37,6 +38,7 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+/* Botón de reserva */
 .reserve-button {
   background: #facc15;
   color: black;
@@ -53,10 +55,7 @@
   background: #eab308;
 }
 
-.main-content {
-  margin-top: 80px;
-}
-
+/* Logo de la Navbar */
 .logo img {
   width: 70px;
   height: auto;
@@ -75,4 +74,17 @@
   .nav-links ul {
     justify-content: center;
   }
+}
+
+/* Asegúrate de que la página no tenga scroll innecesario */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+  height: 100%;
+}
+
+/* Para el contenido principal */
+.main-content {
+  margin-top: 100px; /* Asegura que no se superponga con la navbar */
 }

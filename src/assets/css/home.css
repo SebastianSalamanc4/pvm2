@@ -8,25 +8,26 @@ html, body {
 
 /* Fondo y contenedor principal */
 .home-container {
-  background-image: url('../img/f2.jpg'); /* Si usas una imagen de fondo */
+  background-image: url('../img/f2.jpg'); /* Imagen de fondo */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 100vh;
   width: 100%;
   position: relative;
-  padding-top: 80px; /* Ajuste para que no quede oculto bajo la navbar */
+  padding-top: 80px; /* Ajuste para no cubrir la navbar */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Asegura que no haya scroll en esta área */
+  overflow: hidden; /* Evita scroll interno */
 }
 
 /* Efecto sombra */
 .overlay {
   position: absolute;
-  inset: 0; /* Ajustado para que ocupe todo el área */
+  inset: 0; /* Cubre todo */
   background: rgba(83, 73, 73, 0.26); /* Sombra suave */
+  pointer-events: none; /* ← Permite clics en los elementos debajo */
 }
 
 /* Contenido */
@@ -47,42 +48,51 @@ html, body {
   color: rgb(31, 13, 13);
   text-align: center;
   text-shadow: 5px 3px 4px rgb(255, 245, 100);
-  transform: translateY(50px); /* Inicialmente fuera de la pantalla */
+  transform: translateY(50px); /* Empieza abajo */
   opacity: 0;
   animation: slideInFromBottom 1.2s ease-out forwards;
 }
 
-/* Animación de entrada del título */
+/* Animación del título */
 @keyframes slideInFromBottom {
   0% {
-    transform: translateY(100px); /* Empieza fuera de la pantalla */
+    transform: translateY(100px);
     opacity: 0;
   }
   100% {
-    transform: translateY(0); /* Llega a su posición final */
-    opacity: 1; /* Mejorar visibilidad */
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-/* Estilo para los botones */
+/* Grupo de botones */
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Estilos de botones */
 .vercarta, .reservaboton {
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease; /* Añadido para transiciones suaves */
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
 }
 
 .vercarta {
-  background: rgb(0, 0, 0);
+  background: black;
   color: white;
 }
 
 .reservaboton {
-  background: #facc15; /* Amarillo */
+  background: #facc15;
+  color: black;
   border-radius: 6px;
 }
 
 .reservaboton:hover {
-  background: #e0c600; /* Color más oscuro para el hover */
+  background: #e0c600;
 }
