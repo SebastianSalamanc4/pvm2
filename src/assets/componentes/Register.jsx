@@ -39,7 +39,13 @@ export const Register = () => {
     const usuario = { rut, email, nombre, password };
 
     // Obtener lista de usuarios existentes o iniciar una lista nueva
-    const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+    let usuariosGuardados = [];
+    try {
+      usuariosGuardados = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    } catch (error) {
+      console.error("Error al leer usuarios del localStorage", error);
+      usuariosGuardados = [];
+    }
 
     // Verificar si ya existe un usuario con ese rut o email
     const existe = usuariosGuardados.some(u => u.rut === rut || u.email === email);

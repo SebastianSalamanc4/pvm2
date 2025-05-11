@@ -10,9 +10,9 @@ const DURACION_BLOQUE = 2;
 const SEPARACION_BLOQUE = 0.5;
 
 const mesas = [
-  { id: 1, top: 600, left: 250 },
-  { id: 2, top: 450, left: 485 },
-  { id: 3, top: 450, left: 255 },
+  { id: 1, top: 700, left: 235 },
+  { id: 2, top: 500, left: 235 },
+  { id: 3, top: 500, left: 520 },
 ];
 
 const generarBloquesHorarios = () => {
